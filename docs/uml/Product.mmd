@@ -1,11 +1,35 @@
-classDiagram
-    class Product {
-        - id : Long
-        - name : String
-        - price : double
-        + Product()
-        + Product(id: Long, name: String, price: double)
-        + getId() : Long
-        + getName() : String
-        + getPrice() : double
-    }
+ classDiagram
+
+ class Product {
+     -Long id
+     -String name
+     -Double price
+     +getId() Long
+     +setId(Long id) void
+     +getName() String
+     +setName(String name) void
+     +getPrice() Double
+     +setPrice(Double price) void
+ }
+
+ class ProductService {
+     -List~Product~ products
+     -Long nextId
+     +getAllProducts() List~Product~
+     +getProductById(Long id) Optional~Product~
+     +addProduct(Product product) Product
+     +deleteProduct(Long id) void
+     +findByName(String name) List~Product~
+ }
+
+ class ProductController {
+     -ProductService productService
+     +getAllProducts() List~Product~
+     +getProductById(Long id) Product
+     +addProduct(Product product) Product
+     +deleteProduct(Long id) void
+     +search(String name) List~Product~
+ }
+
+ ProductController ..> ProductService
+ ProductService --> Product
